@@ -10,10 +10,11 @@ with open ('./secrets.json') as s:
     __data = json.load(s)
     __user = __data['tempstick_user']
     __pw = __data['tempstick_pw']
+    __execute_path = __data['chromedriver_loc']
 
 option = webdriver.ChromeOptions()
 option.add_argument('--headless') # don't open a visible window
-driver = webdriver.Chrome('C:\\Users\\karl\\Downloads\\chromedriver.exe', options=option) # Execute path is technically deprecated, but this is the easiest way (for now)
+driver = webdriver.Chrome(__execute_path, options=option) # Execute path is technically deprecated, but this is the easiest way (for now)
  
 page = driver.get('https://temperaturestick.com/sensors/') # Getting page HTML through request
 
