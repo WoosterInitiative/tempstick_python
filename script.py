@@ -3,7 +3,6 @@ import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
 
 # import secrets from JSON
 with open ('./secrets.json') as s:
@@ -15,7 +14,7 @@ with open ('./secrets.json') as s:
 
 option = webdriver.ChromeOptions()
 option.add_argument('--headless') # don't open a visible window
-driver = webdriver.Chrome(__execute_path, options=option) # Execute path is technically deprecated, but this is the easiest way (for now)
+driver = webdriver.Chrome(__execute_path, options=option) # TODO - Execute path is technically deprecated, but this is the easiest way (for now)
  
 page = driver.get('https://temperaturestick.com/sensors/') # Getting page HTML through request
 
@@ -30,7 +29,7 @@ WebDriverWait(driver,3).until(lambda d: d.find_element(By.CLASS_NAME, "dashboard
 # page dynamically loads the values, needs a moment to load them into the class
 time.sleep(__load_delay)
 
-
+# read and store the values
 temp_read = driver.find_element(By.CLASS_NAME, "dashboard-lite__current-reading-last-value").text
 time_read = driver.find_element(By.CLASS_NAME, "dashboard-lite__current-reading-last__time").text
 
